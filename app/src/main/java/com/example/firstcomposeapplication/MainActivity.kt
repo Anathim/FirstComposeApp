@@ -21,6 +21,10 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
+import androidx.navigation.Navigation as Navigation1
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -35,17 +39,19 @@ class MainActivity : ComponentActivity() {
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center)
             {
-            WelcomeText()
+                val navController: NavHostController = rememberNavController()
+                MainScreen(navController = navController)
                 Spacer(modifier = Modifier
                     .height(20.dp))
-            InfoAlertDialog()
+            DetailsScreen(navController = navController)
+                Navigation(navController = navController)
         }
         }
     }
 }
 
 @Composable
-fun WelcomeText() {
+fun MainScreen(navController: NavController) {
     Text(
         text = "Welcome to my Jetpack Compose Journey",
         color = Companion.White,
@@ -57,51 +63,18 @@ fun WelcomeText() {
 }
 
 @Composable
-fun InfoAlertDialog() {
-    val openDialog = remember { mutableStateOf(false)  }
-
-    Button(onClick = {
-        openDialog.value = true
-    },
-        modifier = Modifier
-            .background(color = Companion.Blue)
+fun DetailsScreen(navController: NavController) {
+    Button(
+        onClick = {
+            navController.navigate("DetailsScreen")
+        }
     ) {
-        Icon(
-            Icons.Filled.Info,
-            contentDescription = "info"
-        )
-    }
-
-    if (openDialog.value) {
-        AlertDialog(
-            onDismissRequest = {
-                openDialog.value = false
-            },
-            title = {
-                Text(text = "Info Dialog")
-            },
-            text = {
-                Text("My expectations for 2022 in Mobile Programming 2 are to further " +
-                        "explore the world of Android and the new world of Jetpack Compose, " +
-                        "which I have just been acquainted to. I also expect to get skilled " +
-                        "in Kotlin and expand my skills in mobile programming by developing more applications.")
-            },
-            confirmButton = {
-                Button(
-                    onClick = {
-                        openDialog.value = false
-                    }) {
-                    Text("Confirm")
-                }
-            },
-            dismissButton = {
-                Button(
-                    onClick = {
-                        openDialog.value = false
-                    }) {
-                    Text("Dismiss")
-                }
-            }
+        Text(
+            text = "Start Journey",
+            color = Companion.White,
+            fontSize = MaterialTheme.typography.h6.fontSize,
+            fontWeight = FontWeight.Bold,
+            textAlign = TextAlign.Center
         )
     }
 }
@@ -115,9 +88,9 @@ fun DefaultPreview() {
         .fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center) {
-        WelcomeText()
+        MainScreen(navController = rememberNavController())
         Spacer(modifier = Modifier
             .height(20.dp))
-        InfoAlertDialog()
+        DetailsScreen(navController = rememberNavController())
     }
 }
