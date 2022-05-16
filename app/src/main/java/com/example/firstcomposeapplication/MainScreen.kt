@@ -1,19 +1,12 @@
 package com.example.firstcomposeapplication
 
-import android.graphics.Color
-import android.graphics.Color.*
-import android.graphics.fonts.FontStyle
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Info
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color.*
@@ -24,12 +17,13 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
-import androidx.navigation.Navigation as Navigation1
 
-class MainActivity : ComponentActivity() {
+class MainScreen : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
+            val navController: NavHostController = rememberNavController()
+            Navigation(navController = navController)
             Column(
             modifier = Modifier
                 .height(20.dp)
@@ -39,19 +33,17 @@ class MainActivity : ComponentActivity() {
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center)
             {
-                val navController: NavHostController = rememberNavController()
-                MainScreen(navController = navController)
+                Main(navController = navController)
                 Spacer(modifier = Modifier
                     .height(20.dp))
-            DetailsScreen(navController = navController)
-                Navigation(navController = navController)
+                Details(navController = navController)
         }
         }
     }
 }
 
 @Composable
-fun MainScreen(navController: NavController) {
+fun Main(navController: NavController) {
     Text(
         text = "Welcome to my Jetpack Compose Journey",
         color = Companion.White,
@@ -63,7 +55,7 @@ fun MainScreen(navController: NavController) {
 }
 
 @Composable
-fun DetailsScreen(navController: NavController) {
+fun Details(navController: NavController) {
     Button(
         onClick = {
             navController.navigate("DetailsScreen")
@@ -88,9 +80,9 @@ fun DefaultPreview() {
         .fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center) {
-        MainScreen(navController = rememberNavController())
+        Main(navController = rememberNavController())
         Spacer(modifier = Modifier
             .height(20.dp))
-        DetailsScreen(navController = rememberNavController())
+        Details(navController = rememberNavController())
     }
 }

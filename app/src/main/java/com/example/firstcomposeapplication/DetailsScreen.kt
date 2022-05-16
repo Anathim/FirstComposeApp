@@ -20,11 +20,12 @@ import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 
-class Screen2 : ComponentActivity() {
+class DetailsScreen : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-
+            var navController: NavHostController = rememberNavController()
+            Navigation(navController = navController)
             Column(
                 modifier = Modifier
                     .height(20.dp)
@@ -34,22 +35,20 @@ class Screen2 : ComponentActivity() {
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.Center)
             {
-                val navController: NavHostController = rememberNavController()
-                Journey()
+                Journey(navController = navController)
                 Spacer(modifier = Modifier
                     .height(20.dp))
-                DummyButton()
+                CurrentButton(navController = navController)
                 Spacer(modifier = Modifier
                     .height(20.dp))
                 BackButton(navController = navController)
-                Navigation(navController = navController)
             }
         }
     }
 }
 
 @Composable
-fun Journey() {
+fun Journey(navController: NavController) {
     Text(
         text = "Full Name: Anathi Lindikhaya Mhlom"
     )
@@ -73,9 +72,11 @@ fun Journey() {
 }
 
 @Composable
-fun DummyButton() {
+fun CurrentButton(navController: NavController) {
     Button(
-        onClick = {}
+        onClick = {
+            navController.navigate("ModulesScreen")
+        }
     ) {
         Text(
             text = "Current Modules",
@@ -93,7 +94,7 @@ fun DummyButton() {
 fun BackButton(navController: NavController) {
     Button(
         onClick = {
-            navController.navigate("MainScreen")
+            navController.popBackStack()
         }
     ) {
         Text(
@@ -115,10 +116,10 @@ fun DPreview() {
         .fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center) {
-        Journey()
+        Journey(navController = rememberNavController())
         Spacer(modifier = Modifier
             .height(20.dp))
-        DummyButton()
+        CurrentButton(navController = rememberNavController())
         Spacer(modifier = Modifier
             .height(20.dp))
         BackButton(navController = rememberNavController())
