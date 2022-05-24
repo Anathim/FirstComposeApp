@@ -31,27 +31,27 @@ class ModulesScreen : ComponentActivity() {
             Navigation(navController = navController)
             Column(
                 modifier = Modifier
-                    .height(20.dp)
+                    //.height(20.dp)
                     .background(MaterialTheme.colors.primary)
                     .padding(15.dp)
                     .fillMaxSize(),
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.Center)
             {
-                Modules(navController = navController)
+                Modules()
                 Spacer(modifier = Modifier
                     .height(20.dp))
                 BackButton1(navController = navController)
                 Spacer(modifier = Modifier
                     .height(20.dp))
-                ByeButton(navController = navController)
+                //ByeButton(navController = navController)
             }
         }
     }
 }
 
 @Composable
-fun Modules(navController: NavController) {
+fun Modules() {
     Text(
         text = "Module Name: Project 2," +
                 "Type: Practical," +
@@ -99,7 +99,7 @@ fun BackButton1(navController: NavController) {
     }
 }
 
-@Composable
+/*@Composable
 fun ByeButton(navController: NavController) {
     Button(
         onClick = {
@@ -156,7 +156,7 @@ fun ByeButton(navController: NavController) {
             textAlign = TextAlign.Center
         )
     }
-}
+}*/
 
 @Preview(showBackground = true)
 @Composable
@@ -167,12 +167,12 @@ fun MPreview() {
         .fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center) {
-        Modules(navController = rememberNavController())
+        Modules()
         Spacer(modifier = Modifier
             .height(20.dp))
         BackButton1(navController = rememberNavController())
         Spacer(modifier = Modifier
             .height(20.dp))
-        ByeButton(navController = rememberNavController())
+        //ByeButton(navController = rememberNavController())
     }
 }

@@ -28,14 +28,14 @@ class DetailsScreen : ComponentActivity() {
             Navigation(navController = navController)
             Column(
                 modifier = Modifier
-                    .height(20.dp)
+                    //.height(20.dp)
                     .background(MaterialTheme.colors.primary)
                     .padding(15.dp)
                     .fillMaxSize(),
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.Center)
             {
-                Journey(navController = navController)
+                Journey()
                 Spacer(modifier = Modifier
                     .height(20.dp))
                 CurrentButton(navController = navController)
@@ -48,7 +48,7 @@ class DetailsScreen : ComponentActivity() {
 }
 
 @Composable
-fun Journey(navController: NavController) {
+fun Journey() {
     Text(
         text = "Full Name: Anathi Lindikhaya Mhlom"
     )
@@ -116,7 +116,7 @@ fun DPreview() {
         .fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center) {
-        Journey(navController = rememberNavController())
+        Journey()
         Spacer(modifier = Modifier
             .height(20.dp))
         CurrentButton(navController = rememberNavController())

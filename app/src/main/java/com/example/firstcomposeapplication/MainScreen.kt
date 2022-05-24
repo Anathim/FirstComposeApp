@@ -26,14 +26,14 @@ class MainScreen : ComponentActivity() {
             Navigation(navController = navController)
             Column(
             modifier = Modifier
-                .height(20.dp)
+                //.height(20.dp)
                 .background(MaterialTheme.colors.primary)
                 .padding(15.dp)
                 .fillMaxSize(),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center)
             {
-                Main(navController = navController)
+                Main()
                 Spacer(modifier = Modifier
                     .height(20.dp))
                 Details(navController = navController)
@@ -43,7 +43,7 @@ class MainScreen : ComponentActivity() {
 }
 
 @Composable
-fun Main(navController: NavController) {
+fun Main() {
     Text(
         text = "Welcome to my Jetpack Compose Journey",
         color = Companion.White,
@@ -80,7 +80,7 @@ fun DefaultPreview() {
         .fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center) {
-        Main(navController = rememberNavController())
+        Main()
         Spacer(modifier = Modifier
             .height(20.dp))
         Details(navController = rememberNavController())

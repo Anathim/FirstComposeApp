@@ -8,18 +8,22 @@ import androidx.navigation.compose.rememberNavController
 
 @Composable
 fun Navigation(
-    navController: NavHostController = rememberNavController()
+    navController: NavHostController
 ) {
     NavHost(navController = navController,
         startDestination = "MainScreen") {
         composable("MainScreen") {
-            Main(navController)
+            Main()
+            Details(navController = navController)
         }
         composable("DetailsScreen") {
-            Details
+            Journey()
+            CurrentButton(navController = navController)
+            BackButton(navController = navController)
         }
         composable("ModulesScreen") {
-            Modules(navController = navController)
+            Modules()
+            BackButton1(navController = navController)
         }
     }
 }
